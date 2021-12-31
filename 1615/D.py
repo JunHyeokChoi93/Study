@@ -37,6 +37,7 @@ for pro in range(problem_num):
     node,elves = map(int,input().split())
     node_dict = {}
     edge_dict = {}
+    unknown_lst = []
     for i in range(node-1):
         node1,node2,count = input().split()
         count = int(count)
@@ -48,25 +49,40 @@ for pro in range(problem_num):
             node_dict[node2] = [node1]
         else:
             node_dict[node2].append(node1)
-        edge_dict[node1, node2] = count
-        edge_dict[node2, node1] = count
-    elf_node_lst = []
-    elf_edge_lst = []
+        x=[node1,node2]
+        x.sort()
+        edge_dict[tuple(x)] = count
+        if count == -1:
+            unknown_lst.append(tuple(x))
+    route_lst = []
     elf_memory_lst = []
     for i in range(elves):
         init_node,final_node,memory = input().split()
         memory = int(memory)
         route = find_route(init_node,final_node,node_dict,[])
-        elf_node_lst.append(route)
-        x=[]
+        summation_dict = {'summation':0,'unknown':[],'memory':memory, 'route':route}
         for j in range(len(route)-1):
-            x.append(edge_dict[route[j],route[j+1]])
-        elf_edge_lst.append(x)
-        elf_memory_lst.append(memory)
-    print(elf_node_lst)
-    print(elf_edge_lst)
-    print(elf_memory_lst)
+            key = tuple(sorted([route[j],route[j+1]]))
+            if edge_dict[key] != -1:
+                summation_dict['summation'] += edge_dict[key]
+            else:
+                summation_dict['unknown'].append(key)
+        elf_memory_lst.append(summation_dict)
+
+# 1 - change / 0 - remain
 
 
 
-
+'''
+6 5
+1 2 -1
+1 3 1
+4 2 7
+6 3 0
+2 5 -1
+2 3 1
+2 5 0
+5 6 1
+6 1 1
+4 5 1
+'''
