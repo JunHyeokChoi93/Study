@@ -40,7 +40,7 @@ for pro in range(problem_num):
     unknown_lst = []
     for i in range(node-1):
         node1,node2,count = input().split()
-        count = int(count)
+        node1=int(node1);node2=int(node2);count=int(count)
         if node1 not in node_dict.keys():
             node_dict[node1] = [node2]
         else:
@@ -64,7 +64,7 @@ for pro in range(problem_num):
         for j in range(len(route)-1):
             key = tuple(sorted([route[j],route[j+1]]))
             if edge_dict[key] != -1:
-                summation_dict['summation'] += edge_dict[key]
+                summation_dict['summation'] ^= edge_dict[key]
             else:
                 summation_dict['unknown'].append(key)
         elf_memory_lst.append(summation_dict)
