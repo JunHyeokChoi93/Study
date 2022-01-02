@@ -71,6 +71,9 @@ for pro in range(problem_num):
 
 # 1 - change / 0 - remain
 
+'''
+Find route from not -1
+'''
 
 
 '''
