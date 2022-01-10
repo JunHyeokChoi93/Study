@@ -7,6 +7,7 @@ for problem in range(problem_num):
     for i in range(n):
         l,r = map(int,input().split())
         lst.append(list(range(l,r+1)))
+    lst2 = lst.copy()
 
 
 
